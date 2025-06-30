@@ -7,7 +7,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/index.html")
+    res.sendFile(__dirname + "/chat.html")
 });
 
 io.on('connection', (socket) => {
@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
 
         socket.emit('chatMessage', `server received ${msg}`)
     })
-    
+
     socket.on('disconnect', () => {
         console.log("User disconnected");
     });
