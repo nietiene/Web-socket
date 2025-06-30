@@ -29,7 +29,21 @@
         li.textContent = `From ${from}: ${message}`;
         document.getElementById("messages").appendChild(li);
     });
-    
+
+    function sendPrivateMessage() {
+        const to = document.getElementById("toUser").value;
+        const message = document.getElementById("inputMsg").value;
+
+        if (to && message) {
+            socket.emit("Private message", {
+                to,
+                from: username,
+                message
+            });
+            document.getElementById("inputMsg").value ='';
+            
+        }
+    }
    </script>
 
 </body>
