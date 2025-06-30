@@ -25,7 +25,9 @@
 
         function sendMessage() {
             const input = document.getElementById("inputMsg");
-            
+            const message = input.value;
+            socket.emit("chatMessage", message); // send to the server
+            input.value = ""
         }
       </script>
 </body>
