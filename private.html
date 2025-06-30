@@ -25,8 +25,11 @@
     socket.emit("register", username);
 
     socket.on("privateMessage", ({from, message})  => {
-        const li = 
-    })
+        const li = document.createElement("li");
+        li.textContent = `From ${from}: ${message}`;
+        document.getElementById("messages").appendChild(li);
+    });
+    
    </script>
 
 </body>
