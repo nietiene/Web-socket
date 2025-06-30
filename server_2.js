@@ -17,7 +17,7 @@ io.on('connection', (socket) => {
     socket.on('chatMessage', (msg) => {
         console.log("Received messgae", msg);
 
-        io.emit("chatMessage", msg); 
+        io.emit("chatMessage", msg);  // broadcast to every connected user 
     });
 
     
