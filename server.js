@@ -16,8 +16,12 @@ io.on('connection', (socket) => {
 
     // Sending message and retrieving messgae
     socket.on('chatMessage', (msg) => {
-        console.log("Received message:")
+
+        console.log("Received message:", msg);
+
+        socket.emit('chatMessage', `server received ${msg}`)
     })
+    
     socket.on('disconnect', () => {
         console.log("User disconnected");
     });
