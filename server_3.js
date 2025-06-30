@@ -22,12 +22,12 @@ io.on('connection', (socket) => {
     })
 
     socket.on("privateMessage", ({to, from, message}) => {
-        const targetSocketId = users[to];
+        const targetSocketId = users[to]; // find targeted socket id where his username is to(ex bob);
         if (targetSocketId) {
-            io.to(targetSocketId).emit("privateMessage", {
+            io.to(targetSocketId).emit("privateMessage", { // sends messsage to that Id
                 from, message
             });
-        } else {
+        } else { // when socket id does not online we send message back to user directly
             socket.emit("privateMessage", {
                 from: "system",
                 message: `${to} is not online.`
