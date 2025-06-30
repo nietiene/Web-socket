@@ -4,4 +4,17 @@ const http = require("http");
 
 const app = express();
 const server = http.createServer(app);
-const socket = socketIo(server);
+const io = socketIo(server);
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + "/broad.html");
+});
+
+io.on('connection', (socket) => {
+    console.log("user connected");
+
+
+    socket.on('chatMessage', (msg) => {
+        console.log("Received messgae", msg);
+    });
+})
