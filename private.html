@@ -8,5 +8,14 @@
 <body>
     <h1>Private message</h1>
     <p><strong>Your name</strong> <span id="myName"></span></p>
+
+    <input type="text" id="toUser" placeholder="send to (username)" /> <br>
+    <input type="text" id="inputMsg" placeholder="Type a message...."/>
+    <button onclick="sendPrivateMessage()">Send</button>
+
+    <ul id="message"></ul>
+
+   <script src="/socket.io/socket.io.js"></script>
+
 </body>
 </html>
