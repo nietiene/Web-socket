@@ -15,11 +15,11 @@
 
       <script src="/socket.io/socket.io.js"></script>
       <script>
-        const socket = io();
+        const socket = io(); // start a connection
 
         socket.on('chatMessage', (msg) => {
-            const li = document.createElement("li");
-            li.textContent = msg;
+            const li = document.createElement("li"); // creating new html lists
+            li.textContent = msg; // set those empty lists to a message from the server
             document.getElementById("messages").appendChild(li);
         });
 
