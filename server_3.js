@@ -35,5 +35,13 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('disconnect')
+    socket.on('disconnect', () => {
+      
+        for (let username in users) {
+            if (users[username] === socket.id) {
+                delete users[username];
+                console.log(`User ${username} disconnected`);
+            }
+        }
+    }) 
 })
