@@ -15,6 +15,23 @@
 
    <script src="/socket.io/socket.io.js"></script>
 
+   <script>
+    
+    const socket = io();
    
+    socket.on('chatMessage', (msg) => {
+        const li = document.createElement('messages');
+        li.textContent = msg;
+        document.getElementById("messages").appendChild(li);
+    });
+
+    function sendMessage () {
+        const input = document.getElementById("inputMsg");
+        const message = input.value;
+        
+        socket.emit('chatMessage', message);
+        input.value = '';
+    }
+   </script>
 </body>
 </html>
