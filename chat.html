@@ -20,7 +20,13 @@
         socket.on('chatMessage', (msg) => {
             const li = document.createElement("li");
             li.textContent = msg;
-        })
+            document.getElementById("messages").appendChild(li);
+        });
+
+        function sendMessage() {
+            const input = document.getElementById("inputMsg");
+            
+        }
       </script>
 </body>
 </html>
