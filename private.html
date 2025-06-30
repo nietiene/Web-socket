@@ -27,7 +27,7 @@
     socket.on("privateMessage", ({from, message})  => {
         const li = document.createElement("li");
         li.textContent = `From ${from}: ${message}`;
-        document.getElementById("messages").appendChild(li);
+        document.getElementById("message").appendChild(li);
     });
 
     function sendPrivateMessage() {
@@ -35,13 +35,13 @@
         const message = document.getElementById("inputMsg").value;
 
         if (to && message) {
-            socket.emit("Private message", {
+            socket.emit("privateMessage", {
                 to,
                 from: username,
                 message
             });
             document.getElementById("inputMsg").value ='';
-            
+
         }
     }
    </script>
