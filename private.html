@@ -17,5 +17,17 @@
 
    <script src="/socket.io/socket.io.js"></script>
 
+   <script>
+    
+    const socket = io();
+    const username = prompt("Enter your username");
+    document.getElementById("myName").textContent = username;
+    socket.emit("register", username);
+
+    socket.on("privateMessage", ({from, message})  => {
+        const li = 
+    })
+   </script>
+
 </body>
 </html>
