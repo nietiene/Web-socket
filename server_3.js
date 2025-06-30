@@ -38,8 +38,8 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
       
         for (let username in users) {
-            if (users[username] === socket.id) {
-                delete users[username];
+            if (users[username] === socket.id) { // indicates which user is disconnected
+                delete users[username]; // remove user from our object
                 console.log(`User ${username} disconnected`);
             }
         }
