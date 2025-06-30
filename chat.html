@@ -20,13 +20,13 @@
         socket.on('chatMessage', (msg) => {
             const li = document.createElement("li"); // creating new html lists
             li.textContent = msg; // set those empty lists to a message from the server
-            document.getElementById("messages").appendChild(li);
+            document.getElementById("messages").appendChild(li); // add a new to list in order to make a lists of message
         });
 
         function sendMessage() {
             const input = document.getElementById("inputMsg");
             const message = input.value;
-            socket.emit("chatMessage", message); // send to the server
+            socket.emit("chatMessage", message); // send message to the server
             input.value = ""
         }
       </script>
