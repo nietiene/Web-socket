@@ -15,7 +15,7 @@ io.on('connection', (socket) => {
 
 
     // Sending message and retrieving messgae
-    socket.on('chatMessage', (msg) => {
+    socket.on('chatMessage', (msg) => { // listen to an event
 
         console.log("Received message:", msg);
 
