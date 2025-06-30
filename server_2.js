@@ -14,10 +14,13 @@ io.on('connection', (socket) => {
     console.log("user connected");
 
 
-    socket.on('chatMessage', (msg) => {
-        console.log("Received messgae", msg);
+    socket.on('chatMessage', (data) => {
+        console.log(`${data.username} says ${data.message}`);
 
-        io.emit("chatMessage", msg);  // broadcast to every connected user 
+        io.emit("chatMessage", {
+            username: data.username,
+            message: data.message
+        });  // broadcast to every connected user 
     });
 
     
