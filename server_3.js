@@ -21,5 +21,19 @@ io.on('connection', (socket) => {
         console.log(`Register user: ${username} (socket: ${socket.id})`);
     })
 
-    socket.on()
+    socket.on("privateMessage", ({to, from, message}) => {
+        const targetSocketId = users[to];
+        if (targetSocketId) {
+            io.to(targetSocketId).emit("privateMessage", {
+                from, message
+            });
+        } else {
+            socket.emit("privateMessage", {
+                from: "system",
+                message: `${to} is not online.`
+            })
+        }
+    });
+
+    socket.on('disconnect')
 })
