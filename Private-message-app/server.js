@@ -80,6 +80,19 @@ io.on("connection", (socket) => {
     console.log(`${username} Connected`);
 
     socket.on("privateMessage", ({ to, message }) => {
-        
+        const toSocketId = users[to];
+        if (toSocketId) {
+            io.to(toSocketId).emit("privateMessage", {
+                from:  username,
+                message
+            });
+        }
+    })
+
+
+    socket.on("disconnect", () => {
+        delete users[username];
+        console.log(`${username} disconnected`);
     })
 })
+
