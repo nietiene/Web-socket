@@ -72,4 +72,14 @@ app.get('/userList', (req, res) => {
 io.on("connection", (socket) => {
 
     const session = socket.request.session;
+    if (!session || !session.username)  return socket.disconnect();
+
+    const username = session.username;
+    users[username] = socket.id;
+
+    console.log(`${username} Connected`);
+
+    socket.on("privateMessage", ({ to, message }) => {
+        
+    })
 })
