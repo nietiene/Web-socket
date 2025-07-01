@@ -47,5 +47,9 @@ app.post('/login', (req, res) => {
         "SELECT * FROM users WHERE username = ? AND password = ?",
         [username, password], (err, result) => {
             if (err) throw err;
+
+            if (result.length > 0) {
+                req.session.username = username;
+            }
         })
 })
