@@ -10,6 +10,11 @@
     <input type="text" name="" id="roomInput" placeholder="Enter room"/> <br>
     <button onclick="joinRoom()">Join</button>
 
-    
+    <input type="text" id="inputMsg" placeholder="Enter message" />
+    <button onclick="endMessage()">Send</button>
+    <ul id="messages"></ul>
+
+
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 </html>
