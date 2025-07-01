@@ -11,7 +11,7 @@
     <button onclick="joinRoom()">Join</button>
 
     <input type="text" id="inputMsg" placeholder="Enter message" />
-    <button onclick="endMessage()">Send</button>
+    <button onclick="sendMessage()">Send</button>
     <ul id="messages"></ul>
 
 
@@ -22,8 +22,21 @@
         let currentRoom = "";
 
         function joinRoom() {
-            const room = document.getElementById("roomInput")
+            const room = document.getElementById("roomInput").value;
+            currentRoom = room;
+            socket.endMessage("joinRoom", room);
         }
+
+        function sendMessage() {
+            const msg = document.getElementById("inputMsg").value;
+            socket.emit("roomMessage", { room: currentRoom, message: msg});
+        }
+
+        socket.on("roomMeesage", (msg) => {
+            const li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messages").appendChild(li);
+        })
     </script>
 </body>
 </html>
