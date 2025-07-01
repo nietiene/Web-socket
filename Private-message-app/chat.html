@@ -19,5 +19,12 @@
 
     <script src="/socket.io/socket.io.js"></script>
 
+    <script>
+        const socket = io();
+
+        fetch("/userList")
+        .then(res => res.json())
+        .then(data => {})  
+    </script>
 </body>
 </html>
