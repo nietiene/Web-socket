@@ -68,3 +68,7 @@ app.get('/userList', (req, res) => {
             res.json(result);
            })
 })
+
+io.on("connection", (socket) => {
+    
+})
