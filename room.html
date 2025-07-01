@@ -24,7 +24,7 @@
         function joinRoom() {
             const room = document.getElementById("roomInput").value;
             currentRoom = room;
-            socket.endMessage("joinRoom", room);
+            socket.emit("joinRoom", room);
         }
 
         function sendMessage() {
@@ -32,7 +32,7 @@
             socket.emit("roomMessage", { room: currentRoom, message: msg});
         }
 
-        socket.on("roomMeesage", (msg) => {
+        socket.on("roomMessage", (msg) => {
             const li = document.createElement("li");
             li.textContent = msg;
             document.getElementById("messages").appendChild(li);
