@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(sessionMiddleware);
 
 //share a session with middleware
-
+// use socket and requests in our socket
 io.use((socket, next) => {
     sessionMiddleware(socket.request, {}, next);
 });
