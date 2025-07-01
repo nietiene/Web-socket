@@ -50,6 +50,21 @@ app.post('/login', (req, res) => {
 
             if (result.length > 0) {
                 req.session.username = username;
+                return res.redirect('/');
+            } else {
+                return res.send("Invalid credentials");
             }
         })
+});
+
+app.get('/userList', (req, res) => {
+   if (!req.session.username) return res.status(401).json([]);
+
+   db.query(
+          "SELECT * FROM users WHERE username != ?", 
+           [req.session.username], (err, result) => {
+            if (err) throw err;
+
+            res.json(result);
+           })
 })
