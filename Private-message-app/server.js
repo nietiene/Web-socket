@@ -9,5 +9,9 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const db = mysql.createConnection({
-    
+    host: 'localhost',
+    user: 'root',
+    password: 'factorise@123',
+    database:'chat-app'
 })
+
