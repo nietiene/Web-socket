@@ -101,7 +101,6 @@ app.get("/logout", (req, res) => {
             console.log("Logout error:", err);
             return res.send("Error logging out");
         }
-
         res.redirect("/"); // redirect to login page
     });
 });
