@@ -95,7 +95,16 @@ io.on("connection", (socket) => {
     })
 })
 
+app.get("/logout", (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.log("Logout error:", err);
+            return res.send("Error logging out");
+        }
 
+        res.redirect("/"); // redirect to login page
+    });
+});
 server.listen(4000, () => {
     console.log("http://localhost:4000");
 });

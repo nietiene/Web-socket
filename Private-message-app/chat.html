@@ -27,7 +27,7 @@
         .then(data => {
             const list = document.getElementById("userList");
             data.forEach(user => {
-                const option = document.createElement("userList");
+                const option = document.createElement("option");
                 option.value = user.username;
                 option.textContent = user.username;
                 list.appendChild(option);
@@ -52,5 +52,8 @@
             document.getElementById("messages").appendChild(li);
         }
     </script>
+
+    <button onclick="window.location.href='/logout'">Logout</button>
+
 </body>
 </html>
