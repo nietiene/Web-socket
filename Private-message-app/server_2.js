@@ -37,7 +37,7 @@ const users = {};
 // Routes
 app.get('/', (req, res) => {
     if (req.session.username) {
-        res.sendFile(path.join(__dirname, 'chat.html'));
+        res.sendFile(path.join(__dirname, 'chat_2.html'));
     } else {
         res.sendFile(path.join(__dirname, 'login.html'));
     }
@@ -136,6 +136,6 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(4000, () => {
-    console.log("Server running on http://localhost:4000");
+server.listen(4001, () => {
+    console.log("Server running on http://localhost:4001");
 });
