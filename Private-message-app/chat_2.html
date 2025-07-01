@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Private Chat</title>
+</head>
+<body>
+    <h2>Private Chat</h2>
+    <label>Select user to chat with:</label>
+    <select id="userList"></select><br><br>
+
+    <input type="text" id="msgInput" placeholder="Enter message" />
+    <button onclick="sendPrivate()">Send</button>
+    <button onclick="window.location.href='/logout'">Logout</button>
+
+    <ul id="messages"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        let myUsername = "";
+
+        fetch("/whoami")
+            .then(res => res.json())
+            .then(data => {
+                myUsername = data.username;
+            });
+
+        fetch("/userList")
+            .then(res => res.json())
+            .then(users => {
+                const userList = document.getElementById("userList");
+                users.forEach(user => {
+                    const option = document.createElement("option");
+                    option.value = user.username;
+                    option.textContent = user.username;
+                    userList.appendChild(option);
+                });
+
+                // Auto-load messages with first user
+                if (users.length > 0) {
+                    loadMessages(users[0].username);
+                }
+            });
+
+        document.getElementById("userList").addEventListener("change", () => {
+            const selectedUser = document.getElementById("userList").value;
+            document.getElementById("messages").innerHTML = "";
+            loadMessages(selectedUser);
+        });
+
+        function sendPrivate() {
+            const to = document.getElementById("userList").value;
+            const message = document.getElementById("msgInput").value;
+            socket.emit("privateMessage", { to, message });
+            addMessage(`You to ${to}: ${message}`);
+            document.getElementById("msgInput").value = "";
+        }
+
+        socket.on("privateMessage", ({ from, message }) => {
+            addMessage(`${from}: ${message}`);
+        });
+
+        function addMessage(msg) {
+            const li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messages").appendChild(li);
+        }
+
+        function loadMessages(withUser) {
+            fetch(`/messages/${withUser}`)
+                .then(res => res.json())
+                .then(messages => {
+                    messages.forEach(m => {
+                        const who = m.sender === myUsername ? "You" : m.sender;
+                        addMessage(`${who} to ${m.receiver}: ${m.message}`);
+                    });
+                });
+        }
+    </script>
+</body>
+</html>
