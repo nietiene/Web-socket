@@ -1,4 +1,11 @@
 const express = require("express");
 const http = require("http");
 const session = require("express-session");
-const
+const mysql = require("mysql2");
+const { Server } = require("socket.io");
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
+const db = 
