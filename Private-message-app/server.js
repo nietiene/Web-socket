@@ -70,5 +70,6 @@ app.get('/userList', (req, res) => {
 })
 
 io.on("connection", (socket) => {
-    
+
+    const session = socket.request.session;
 })
