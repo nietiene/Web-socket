@@ -15,3 +15,11 @@ const db = mysql.createConnection({
     database:'chat-app'
 })
 
+const sessionMiddleware = session({
+    secret: 'go-away',
+    resave: false,
+    saveUninitialized: true
+});
+
+app.use(express.urlencoded({ extended: true }));
+app.use(sessionMiddleware);
