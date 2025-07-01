@@ -23,3 +23,13 @@ const sessionMiddleware = session({
 
 app.use(express.urlencoded({ extended: true }));
 app.use(sessionMiddleware);
+
+//share a session with middleware
+
+io.use((socket, next) => {
+    sessionMiddleware(socket.request, {}, next);
+});
+
+const users = {};
+
+app.get('/', (req, res) => {})
