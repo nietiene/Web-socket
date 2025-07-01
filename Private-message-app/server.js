@@ -38,4 +38,8 @@ app.get('/', (req, res) => {
     } else {
        res.sendFile(__dirname + "/login.html");
     }
+});
+
+app.post('/login', (req, res) => {
+    
 })
