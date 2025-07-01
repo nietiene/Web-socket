@@ -33,7 +33,7 @@ io.use((socket, next) => {
 const users = {};
 
 app.get('/', (req, res) => {
-    if (res.session.username) {
+    if (req.session.username) {
         res.sendFile(__dirname + "/chat.html");
     } else {
        res.sendFile(__dirname + "/login.html");
