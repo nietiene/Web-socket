@@ -3,6 +3,7 @@ const http = require("http");
 const session = require("express-session");
 const mysql = require("mysql2");
 const { Server } = require("socket.io");
+const { use } = require("react");
 
 const app = express();
 const server = http.createServer(app);
@@ -41,5 +42,10 @@ app.get('/', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    
+    const {username, password} = req.body;
+    db.query(
+        "SELECT * FROM users WHERE username = ? AND password = ?",
+        [username, password], (err, result) => {
+            if (err) throw err;
+        })
 })
