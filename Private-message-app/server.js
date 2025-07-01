@@ -32,6 +32,17 @@ io.use((socket, next) => {
 
 const users = {};
 
+app.get('/userList', (req, res) => {
+   if (!req.session.username) return res.status(401).json([]);
+
+   db.query(
+          "SELECT * FROM users WHERE username != ?", 
+           [req.session.username], (err, result) => {
+            if (err) throw err;
+
+            res.json(result);
+           })
+})
 app.get('/', (req, res) => {
     if (req.session.username) {
         res.sendFile(__dirname + "/chat.html");
@@ -56,17 +67,6 @@ app.post('/login', (req, res) => {
         })
 });
 
-app.get('/userList', (req, res) => {
-   if (!req.session.username) return res.status(401).json([]);
-
-   db.query(
-          "SELECT * FROM users WHERE username != ?", 
-           [req.session.username], (err, result) => {
-            if (err) throw err;
-
-            res.json(result);
-           })
-})
 
 io.on("connection", (socket) => {
 
