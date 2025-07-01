@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
     console.log("User connected");
 
-    socket.on("joinRoom", (roomName) => {
+    socket.on("joinRoom", (roomName) => { // socket is connection between server and one user
         socket.join(roomName);
         console.log(`User joined ${roomName}`);
     });
