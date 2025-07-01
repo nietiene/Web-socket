@@ -24,7 +24,33 @@
 
         fetch("/userList")
         .then(res => res.json())
-        .then(data => {})  
+        .then(data => {
+            const list = document.getElementById("userList");
+            data.forEach(user => {
+                const option = document.getElementById("userList");
+                option.value = user.username;
+                option.textContent = user.username;
+                list.appendChild(option);
+            });
+        })  
+
+        function sendPrivate() {
+            const to = document.getElementById("userList").value;
+            const message = document.getElementById("msgInput").value;
+            socket.emit("privateMessage", { to, message });
+            addMessage(`You to ${to}: ${message}`);
+            document.getElementById("msgInput").value = "";
+        }
+
+        socket.on("privateMessage", ({ from, message}) => {
+            addMessage(`${from}: ${message}`);
+        });
+
+        function addMessage () {
+            const li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messages").appendChild(li);
+        }
     </script>
 </body>
 </html>

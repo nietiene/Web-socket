@@ -3,7 +3,6 @@ const http = require("http");
 const session = require("express-session");
 const mysql = require("mysql2");
 const { Server } = require("socket.io");
-const { use } = require("react");
 
 const app = express();
 const server = http.createServer(app);
@@ -13,7 +12,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'factorise@123',
-    database:'chat-app'
+    database:'chat_app'
 })
 
 const sessionMiddleware = session({
