@@ -35,14 +35,14 @@ io.use((socket, next) => {
     sessionMiddleware(socket.request, {}, next);
 });
 
-const user = {};
+const users = {};
 
 function broadCastOnlineUser() {
     db.query(
         `SELECT username FROM users`, (err, result) => {
             const userList = result.map(u => ({
                 username: u.username,
-                online: !!user[u.username]
+                online: !!users[u.username]
             }))
             io.emit("updateOnlineUser", userList);
         })
@@ -110,7 +110,7 @@ io.on("connection", (socket) => {
     if (!session || !session.username) return socket.disconnect();
 
     const username = session.username;
-    user[username] = socket.id;
+    users[username] = socket.id;
     console.log(`${username} connected`);  
     broadCastOnlineUser();
 
@@ -145,7 +145,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
-        delete user[username];
+        delete users[username];
         broadCastOnlineUser();
         console.log(`${username} disconnected`);
     })
