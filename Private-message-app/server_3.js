@@ -14,9 +14,14 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'chat_app'
+    database: 'chat_app',
+    port: 3007 
 });
 
+db.connect((err) => {
+    if (err) console.log("err", err);
+    console.log("Connected");
+})
 const sessionMiddleware = session({
     secret: 'go-away',
     resave: false,
@@ -148,5 +153,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(4005, () => {
-    console.log("http:/localhost:4005");
+    console.log("http://localhost:4005");
 })
