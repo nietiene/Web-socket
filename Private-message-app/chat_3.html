@@ -25,7 +25,7 @@
 
      fetch("/whoami")
      .then(res => res.json())
-     .then(data => { myUsername: data.username });
+     .then(data => { myUsername = data.username });
      
      const typing = document.getElementById("typing");
      const userList = document.getElementById("userList");
@@ -88,8 +88,8 @@
          msgInput.value = "";
      }
 
-     function loadMessage() {
-        fetch(`/messages/${withUser}`
+     function loadMessage(withUser) {
+        fetch(`/messages/${withUser}`)
             .then(res => res.json())
             .then(messages => {
                 messages.forEach(m => {
@@ -97,7 +97,6 @@
                     addMessage(`${who} to ${m.receiver}: ${m.message}`);
                 })
             })
-        )
      }
 
      function loadMessage(msg) {
