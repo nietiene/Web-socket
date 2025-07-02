@@ -14,7 +14,7 @@ const io = new Server(server);
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'factorise@123',
+    password: '',
     database: 'chat_app'
 });
 
@@ -78,3 +78,12 @@ app.get("/logout", (req, res) => {
     });
 });
 
+
+app.get("/messages/:withUser", (req, res) => {
+    const from = req.session.username;
+    const to = req.session.withUser;
+
+    db.query(
+        `UPDATE message set`
+    )
+})
