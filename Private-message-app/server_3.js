@@ -100,4 +100,10 @@ app.get("/messages/:withUser", (req, res) => {
 app.get('/whoami', (req, res) => {
     if (!req.session.username) return res.status(400).json({username: null});
     res.json({ username: req.session.username});
+});
+
+io.on("connection", (socket) => {
+    const session = socket.request.session;
+    if (!session || !session.username) return socket.disconnect();
+    
 })
