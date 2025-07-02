@@ -53,6 +53,12 @@ app.get('/', (req, res) => {
     }
 })
 
-app.post("/lgoin", (req, res) => {
-    
+app.post("/login", (req, res) => {
+       const { username, password } = req.body;
+
+       db.query(
+        `SELECT * FROM users WHERE username = ? AND password = ?`,
+        [username, password],
+        ()
+       )
 })
