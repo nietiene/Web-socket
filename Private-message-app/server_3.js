@@ -108,5 +108,5 @@ io.on("connection", (socket) => {
 
     const username = session.username;
     user[username] = socket.id;
-    
+    console.log(`${username} connected`);  
 })
