@@ -53,8 +53,16 @@
         socket.emit("typing", { to: userList.value })
         clearTimeout(window.typingTimeout);
         window.typingTimeout = setTimeout(() => {
-            
-        })
+            socket.emit("stopTyping", { to: userList.value });
+        }, 1000);
+     });
+
+     socket.on("typing", from => {
+        typing.textContent = `${from} is typing.....`;
+     });
+
+     socket.on("stopTyping", () => {
+        
      })
    </script>
 </body>
