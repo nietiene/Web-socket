@@ -41,7 +41,20 @@
             userList.appendChild(option);
         })
         if (users.length > 0) loadMessage(users[0].username);
-        
+     })
+
+     userList.addEventListener("change", () => {
+        const selected = userList.value;
+        document.getElementById("messages").innerHTML = "";
+        loadMessage(selected);
+     })
+
+     msgInput.addEventListener("input", () => {
+        socket.emit("typing", { to: userList.value })
+        clearTimeout(window.typingTimeout);
+        window.typingTimeout = setTimeout(() => {
+            
+        })
      })
    </script>
 </body>
