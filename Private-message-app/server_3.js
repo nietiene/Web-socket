@@ -141,5 +141,9 @@ io.on("connection", (socket) => {
         if (toSocketId) io.to(toSocketId).emit("stopTyping");
     });
 
-    socket.on
+    socket.on("disconnect", () => {
+        delete user[username];
+        broadCastOnlineUser();
+        console.log(`${username} disconnected`);
+    })
 })
