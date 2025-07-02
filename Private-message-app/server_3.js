@@ -84,6 +84,7 @@ app.get("/messages/:withUser", (req, res) => {
     const to = req.session.withUser;
 
     db.query(
-        `UPDATE message set`
+        `UPDATE message SET is_read = true WHERE receiver = ? AND sender = ?`,
+         [from, to]
     )
 })
