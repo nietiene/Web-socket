@@ -40,12 +40,16 @@ const users = {};
 function broadCastOnlineUser() {
     db.query(
         `SELECT username FROM users`, (err, result) => {
+            if (err) console.error(err);
+
             const userList = result.map(u => ({
                 username: u.username,
-                online: !!users[u.username]
+                online: !!users[u.username] && users[u.username].length > 0
             }))
             io.emit("updateOnlineUser", userList);
         })
+     console.log("Currently online users:", Object.keys(users));
+
 }
 
 app.get('/', (req, res) => {
@@ -115,7 +119,7 @@ io.on("connection", (socket) => {
     broadCastOnlineUser();
 
     socket.on("privateMessage", ({ to, message }) => {
-        const toSocketId = user[to];
+        const toSocketId = users[to];
         db.query(
             `INSERT INTO messages (sender, receiver, message) VALUES(?,?,?)`,
             [username, to, message],
