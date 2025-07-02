@@ -111,5 +111,11 @@ io.on("connection", (socket) => {
     console.log(`${username} connected`);  
     broadCastOnlineUser();
 
-    socket.on("privateMessage", ())
+    socket.on("privateMessage", ({ to, message }) => {
+        const toSocketId = user[to];
+        db.query(
+            `INSERT INTO messages (sender, receiver, message) VALUES(?,?,?)`,
+            [username, to]
+        )
+    })
 })
