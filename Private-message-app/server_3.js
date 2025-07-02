@@ -96,3 +96,5 @@ app.get("/messages/:withUser", (req, res) => {
      }
     )
 })
+
+app.get('/whoami')
