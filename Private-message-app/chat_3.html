@@ -36,7 +36,8 @@
      .then(users => {
         users.forEach(user => {
             const option = document.createElement("option");
-            
+            option.value = user.username;
+            option.textContent = user.username;
         })
      })
    </script>
