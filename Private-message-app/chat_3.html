@@ -69,10 +69,14 @@
         addMessage(`${from} : ${message}`);
      });
 
-     socket.on("upsateOnlineUser", user => {
+     socket.on("updateOnlineUser", user => {
         userList.innerHTML = "";
         user.forEach(user => {
             const option = document.createElement("option");
+            option.value = user.username;
+            option.textContent = `${user.username} ${user.online ? '(online)' :  '(offline)'}`;
+            userList.appendChild(option);
+
         }) 
      })
    </script>
