@@ -15,7 +15,6 @@ const db = mysql.createConnection({
     user: 'root',
     password: '',
     database: 'chat_app',
-    port: 3007 
 });
 
 db.connect((err) => {
@@ -51,9 +50,9 @@ function broadCastOnlineUser() {
 
 app.get('/', (req, res) => {
     if (req.session.username) {
-        res.sendFile(__dirname, "/chat_3.html");
+        res.sendFile(path.join(__dirname, "/chat_3.html"));
     } else {
-        res.sendFile(__dirname + "/login.html");
+        res.sendFile(path.join(__dirname + "/login.html"));
     }
 })
 
