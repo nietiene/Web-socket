@@ -136,5 +136,10 @@ io.on("connection", (socket) => {
 
     })
 
-    
+    socket.on("stopTyping", ({ to }) => {
+        const toSocketId = user[to];
+        if (toSocketId) io.to(toSocketId).emit("stopTyping");
+    });
+
+    socket.on
 })
