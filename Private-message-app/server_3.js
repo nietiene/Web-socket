@@ -32,3 +32,23 @@ io.use((socket, next) => {
     sessionMiddleware(socket.request, {}, next);
 });
 
+const user = {};
+
+function broadCastOnlineUser() {
+    db.query(
+        `SELECT username FROM users`, (err, result) => {
+            const userList = result.map(u => ({
+                username: u.username,
+                online: !user[u.userList]
+            }))
+            io.emit("updateOnlineUser", userList);
+        })
+}
+
+app.get('/', (req, res) => {
+    if (req.session.username) {
+        res.sendFile(__dirname, "/chat.html");
+    } else {
+        
+    }
+})
