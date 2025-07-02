@@ -64,6 +64,8 @@ app.post("/login", (req, res) => {
             if (result.length > 0) {
                 req.session.username = username;
                 res.redirect("/");
+            } else {
+                res.send("Invalid credentials");
             }
         }
        )
