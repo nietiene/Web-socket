@@ -38,7 +38,10 @@
             const option = document.createElement("option");
             option.value = user.username;
             option.textContent = user.username;
+            userList.appendChild(option);
         })
+        if (users.length > 0) loadMessage(users[0].username);
+        
      })
    </script>
 </body>
