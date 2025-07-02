@@ -62,7 +62,18 @@
      });
 
      socket.on("stopTyping", () => {
-        
+        typing.textContent = "";
+     });
+
+     socket.on("privateMessage", ({ from, message }) => {
+        addMessage(`${from} : ${message}`);
+     });
+
+     socket.on("upsateOnlineUser", user => {
+        userList.innerHTML = "";
+        user.forEach(user => {
+            const option = document.createElement("option");
+        }) 
      })
    </script>
 </body>
