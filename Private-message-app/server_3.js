@@ -4,7 +4,6 @@ const session = require("express-session");
 const mysql = require("mysql2");
 const { Server } = require("socket.io");
 const path = require("path");
-const { Socket } = require("dgram");
 
 const app = express();
 const server = http.createServer(app);
@@ -47,7 +46,7 @@ function broadCastOnlineUser() {
 
 app.get('/', (req, res) => {
     if (req.session.username) {
-        res.sendFile(__dirname, "/chat.html");
+        res.sendFile(__dirname, "/chat_3.html");
     } else {
         res.sendFile(__dirname + "/login.html");
     }
