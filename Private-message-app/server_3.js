@@ -87,13 +87,13 @@ app.get("/messages/:withUser", (req, res) => {
     const to = req.session.withUser;
 
     db.query(
-        `UPDATE message SET is_read = true WHERE receiver = ? AND sender = ?`,
+        `UPDATE messages SET is_read = true WHERE receiver = ? AND sender = ?`,
          [from, to]
     );
 
     db.query(
         `SELECT * FROM messages WHERE (sender = ?  AND receiver = ? ) OR (sender = ? AND receiver = ?) ORDER BY timestamp ASC`,
-        (err, result) => {
+        [from, to, to, from],(err, result) => {
             if (err)  throw err;
             res.json(result);
      }

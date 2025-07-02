@@ -83,6 +83,9 @@
      function sendPrivate () {
          const to = userList.value;
          const message = msgInput.value;
+
+         if (!message) return;
+         
          socket.emit("privateMessage", { to, message });
          addMessage(`You to ${to} : ${message}`);
          msgInput.value = "";
@@ -99,7 +102,7 @@
             })
      }
 
-     function loadMessage(msg) {
+     function addMessage(msg) {
         const li = document.createElement("li");
         li.textContent = msg;
         document.getElementById("messages").appendChild(li);
