@@ -42,7 +42,7 @@ function broadCastOnlineUser() {
         `SELECT username FROM users`, (err, result) => {
             const userList = result.map(u => ({
                 username: u.username,
-                online: !user[u.userList]
+                online: !user[u.username]
             }))
             io.emit("updateOnlineUser", userList);
         })
