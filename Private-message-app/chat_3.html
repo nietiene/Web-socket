@@ -16,5 +16,18 @@
 
     <p id="typing"></p>
     <ul id="messages"></ul>
+
+   <script src="/socket.io/socket.io.js"></script>
+
+   <script>
+     const socket = io();
+     let myUsername = "";
+
+     fetch("/whoami")
+     .then(res => res.json())
+     .then(data => { myUsername: data.username });
+     
+     const typing = document.getElementById("typing");
+   </script>
 </body>
 </html>
