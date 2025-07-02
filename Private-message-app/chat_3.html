@@ -28,6 +28,17 @@
      .then(data => { myUsername: data.username });
      
      const typing = document.getElementById("typing");
+     const userList = document.getElementById("userList");
+     const msgInput = document.getElementById("inputMsg");
+
+     fetch("/userList")
+     .then(res => res.json())
+     .then(users => {
+        users.forEach(user => {
+            const option = document.createElement("option");
+            
+        })
+     })
    </script>
 </body>
 </html>
