@@ -46,7 +46,7 @@ function broadCastOnlineUser() {
 
             const userList = result.map(u => ({
                 username: u.username,
-                online: !!users[u.username] && users[u.username].length > 0
+                online: !!users[u.username] && users[u.username].length > 0 // when is has active socket id
             }))
             io.emit("updateOnlineUser", userList);
         })
