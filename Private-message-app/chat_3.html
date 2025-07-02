@@ -85,7 +85,7 @@
          const message = msgInput.value;
 
          if (!message) return;
-         
+
          socket.emit("privateMessage", { to, message });
          addMessage(`You to ${to} : ${message}`);
          msgInput.value = "";
