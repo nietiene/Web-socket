@@ -146,4 +146,8 @@ io.on("connection", (socket) => {
         broadCastOnlineUser();
         console.log(`${username} disconnected`);
     })
+});
+
+server.listen(4005, () => {
+    console.log("http:/localhost:4005");
 })
