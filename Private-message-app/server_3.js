@@ -125,7 +125,12 @@ io.on("connection", (socket) => {
             io.to(toSocketId).emit("privateMessage", {
                 from: username,
                 message
-            })
+            });
         }
+
+    })
+
+    socket.on("typing", ({ to }) => {
+        const toSocketId = user[to];
     })
 })
