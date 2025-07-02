@@ -31,7 +31,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(sessionMiddleware);
 app.use(express.static(__dirname));
 
+// integrating session to socket app
 io.use((socket, next) => {
+    // socket: individual socket connection
     sessionMiddleware(socket.request, {}, next);
 });
 
