@@ -90,6 +90,9 @@ app.get("/messages/:withUser", (req, res) => {
 
     db.query(
         `SELECT * FROM messages WHERE (sender = ?  AND receiver = ? ) OR (sender = ? AND receiver = ?) ORDER BY timestamp ASC`,
-        ()
+        (err, result) => {
+            if (err)  throw err;
+            res.json(result);
+     }
     )
 })
