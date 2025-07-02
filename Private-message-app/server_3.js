@@ -105,5 +105,8 @@ app.get('/whoami', (req, res) => {
 io.on("connection", (socket) => {
     const session = socket.request.session;
     if (!session || !session.username) return socket.disconnect();
+
+    const username = session.username;
+    user[username] = socket.id;
     
 })
