@@ -79,6 +79,32 @@
 
         }) 
      })
+
+     function sendPrivate () {
+         const to = userList.value;
+         const message = msgInput.value;
+         socket.emit("privateMessage", { to, message });
+         addMessage(`You to ${to} : ${message}`);
+         msgInput.value = "";
+     }
+
+     function loadMessage() {
+        fetch(`/messages/${withUser}`
+            .then(res => res.json())
+            .then(messages => {
+                messages.forEach(m => {
+                    const who = m.sender === myUsername ? "You" : m.sender;
+                    addMessage(`${who} to ${m.receiver}: ${m.message}`);
+                })
+            })
+        )
+     }
+
+     function loadMessage(msg) {
+        const li = document.createElement("li");
+        li.textContent = msg;
+        document.getElementById("messages").appendChild(li);
+     }
    </script>
 </body>
 </html>
