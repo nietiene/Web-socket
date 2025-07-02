@@ -97,4 +97,7 @@ app.get("/messages/:withUser", (req, res) => {
     )
 })
 
-app.get('/whoami')
+app.get('/whoami', (req, res) => {
+    if (!req.session.username) return res.status(400).json({username: null});
+    res.json({ username: req.session.username});
+})
