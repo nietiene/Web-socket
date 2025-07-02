@@ -42,7 +42,7 @@ function broadCastOnlineUser() {
         `SELECT username FROM users`, (err, result) => {
             const userList = result.map(u => ({
                 username: u.username,
-                online: !user[u.username]
+                online: !!user[u.username]
             }))
             io.emit("updateOnlineUser", userList);
         })
@@ -84,7 +84,7 @@ app.get("/logout", (req, res) => {
 
 app.get("/messages/:withUser", (req, res) => {
     const from = req.session.username;
-    const to = req.session.withUser;
+    const to = req.params.withUser;
 
     db.query(
         `UPDATE messages SET is_read = true WHERE receiver = ? AND sender = ?`,
