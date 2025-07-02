@@ -86,5 +86,9 @@ app.get("/messages/:withUser", (req, res) => {
     db.query(
         `UPDATE message SET is_read = true WHERE receiver = ? AND sender = ?`,
          [from, to]
+    );
+
+    db.query(
+        `SELECT * FROM `
     )
 })
