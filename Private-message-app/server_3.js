@@ -132,5 +132,9 @@ io.on("connection", (socket) => {
 
     socket.on("typing", ({ to }) => {
         const toSocketId = user[to];
+        if (toSocketId) io.to(toSocketId).emit("typing", username);
+
     })
+
+    
 })
