@@ -115,7 +115,17 @@ io.on("connection", (socket) => {
         const toSocketId = user[to];
         db.query(
             `INSERT INTO messages (sender, receiver, message) VALUES(?,?,?)`,
-            [username, to]
-        )
+            [username, to, message],
+            (err) => {
+                if (err) console.log("DB Error", err);
+            }
+        );
+
+        if (toSocketId) {
+            io.to(toSocketId).emit("privateMessage", {
+                from: username,
+                message
+            })
+        }
     })
 })
