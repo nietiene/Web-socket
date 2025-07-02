@@ -138,13 +138,13 @@ io.on("connection", (socket) => {
     })
 
     socket.on("typing", ({ to }) => {
-        const toSocketId = user[to];
+        const toSocketId = users[to];
         if (toSocketId) io.to(toSocketId).emit("typing", username);
 
     })
 
     socket.on("stopTyping", ({ to }) => {
-        const toSocketId = user[to];
+        const toSocketId = users[to];
         if (toSocketId) io.to(toSocketId).emit("stopTyping");
     });
 
