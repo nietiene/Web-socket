@@ -49,6 +49,10 @@ app.get('/', (req, res) => {
     if (req.session.username) {
         res.sendFile(__dirname, "/chat.html");
     } else {
-        
+        res.sendFile(__dirname + "/login.html");
     }
+})
+
+app.post("/lgoin", (req, res) => {
+    
 })
